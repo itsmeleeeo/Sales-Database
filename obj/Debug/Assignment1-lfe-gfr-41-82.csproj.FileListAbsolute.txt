@@ -1,0 +1,16 @@
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82.csproj.AssemblyReference.cache
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82.csproj.SuggestedBindingRedirects.cache
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\MainWindow.g.cs
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\App.g.cs
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82_MarkupCompile.cache
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82_MarkupCompile.lref
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\bin\Debug\Assignment1-lfe-gfr-41-82.exe.config
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\bin\Debug\Assignment1-lfe-gfr-41-82.exe
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\bin\Debug\Assignment1-lfe-gfr-41-82.pdb
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\MainWindow.baml
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82.g.resources
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1_lfe_gfr_41_82.Properties.Resources.resources
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82.csproj.GenerateResource.cache
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82.csproj.CoreCompileInputs.cache
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82.exe
+C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82.pdb
