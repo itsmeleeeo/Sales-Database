@@ -13,6 +13,7 @@
         <TextBox x:Name="txtTotalTransactions" HorizontalAlignment="Left" Margin="715,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75
                  " IsEnabled="False"/>
         <Label Content="Total Transaction" HorizontalAlignment="Left" Margin="612,138,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="lstShipping" Margin="131,303,594,54" />
 
     </Grid>
 </Window>
