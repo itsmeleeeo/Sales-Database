@@ -33,6 +33,7 @@ namespace Assignment1_lfe_gfr_41_82
             populateDataGrid();
             TotalTransactions();
             AverageTransaction();
+            ShippingMode();
         }
 
         private void initializeDataGrid()
@@ -140,6 +141,11 @@ namespace Assignment1_lfe_gfr_41_82
         {
             var totalTransactions = myStore.Count();
             txtTotalTransactions.Text = totalTransactions.ToString();
+        }
+
+        private void ShippingMode()
+        {
+
         }
     }
 }
