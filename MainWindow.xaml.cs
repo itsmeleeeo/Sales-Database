@@ -34,6 +34,7 @@ namespace Assignment1_lfe_gfr_41_82
             TotalTransactions();
             AverageTransaction();
             ShippingMode();
+            populateProductCategory();
         }
 
         private void initializeDataGrid()
@@ -105,8 +106,11 @@ namespace Assignment1_lfe_gfr_41_82
 
         private void populateProductCategory()
         {
-            var productCategory = from p in myStore
-                                  select p.productCategory;
+            var productCategory = myStore.Select(x => x.productCategory).Distinct();
+            foreach (var p in productCategory)
+            {
+                listCat.Items.Add(p.Trim());
+            }
 
         }
         private void populateSubProductCategory()
