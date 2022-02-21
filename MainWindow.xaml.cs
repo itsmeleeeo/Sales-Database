@@ -31,7 +31,8 @@ namespace Assignment1_lfe_gfr_41_82
 
             initializeDataGrid();
             populateDataGrid();
-
+            TotalTransactions();
+            AverageTransaction();
         }
 
         private void initializeDataGrid()
@@ -122,6 +123,23 @@ namespace Assignment1_lfe_gfr_41_82
         {
             var productProvince = from p in myStore
                                       select p.province;
+        }
+
+        private void AverageTransaction()
+        {
+            double total = 0.0;
+            var avgTransaction = (from s in myStore select s.sales).Sum();
+            var transactions = myStore.Count();
+
+            total = avgTransaction / transactions;
+
+            txtAverageTransaction.Text = String.Format("${0:#.00}", Convert.ToDecimal(total));
+        }
+
+        private void TotalTransactions()
+        {
+            var totalTransactions = myStore.Count();
+            txtTotalTransactions.Text = totalTransactions.ToString();
         }
     }
 }
