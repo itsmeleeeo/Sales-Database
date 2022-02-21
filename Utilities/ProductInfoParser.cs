@@ -21,10 +21,8 @@ namespace Assignment1_lfe_gfr_41_82.Utilities
                 //string[] fields = line.Trim().Split('\u002C');
                 string[] fields = line.Trim().Split('|');
 
-                if(fields.Length != 11)
+                if(fields.Length != 12)
                 {
-                    MessageBox.Show("Problem parsing file, check format");
-                    break;
                 } else {
                     try
                     {
