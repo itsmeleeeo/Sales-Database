@@ -31,6 +31,7 @@ namespace Assignment1_lfe_gfr_41_82
 
             initializeDataGrid();
             populateDataGrid();
+
         }
 
         private void initializeDataGrid()
