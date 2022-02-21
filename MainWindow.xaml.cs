@@ -26,7 +26,7 @@ namespace Assignment1_lfe_gfr_41_82
         public MainWindow()
         {
             InitializeComponent();
-            string fileContents = FileService.ReadFile(@"..\..\data\Assignment1.psv");
+            string fileContents = FileService.ReadFile(@"..\..\Data\Assignment1.psv");
             myStore = ProductInfoParser.ParseRoster(fileContents);
 
             initializeDataGrid();
@@ -97,6 +97,29 @@ namespace Assignment1_lfe_gfr_41_82
             {
                 dataGridProducts.Items.Add(pi);
             }
+        }
+
+        private void populateProductCategory()
+        {
+            var productCategory = from p in myStore
+                                  select p.productCategory;
+
+        }
+        private void populateSubProductCategory()
+        {
+            var productSubCategory = from p in myStore
+                                  select p.productSubCategory;
+        }
+
+        private void populateShippingMode()
+        {
+            var productShippingMode = from p in myStore
+                                     select p.shippingMode;
+        }
+        private void populateProvince()
+        {
+            var productProvince = from p in myStore
+                                      select p.province;
         }
     }
 }

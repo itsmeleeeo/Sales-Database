@@ -14,3 +14,18 @@ C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO 
 C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82.csproj.CoreCompileInputs.cache
 C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82.exe
 C:\Users\leeeo\Documents\Douglas College - 7th Semester\CSIS 4050 - Advanced OO Prog for Bus App\Assignment1-lfe-gfr-41-82\obj\Debug\Assignment1-lfe-gfr-41-82.pdb
+C:\Users\Gabriel\Source\Repos\Sales-Database\bin\Debug\Assignment1-lfe-gfr-41-82.exe.config
+C:\Users\Gabriel\Source\Repos\Sales-Database\bin\Debug\Assignment1-lfe-gfr-41-82.exe
+C:\Users\Gabriel\Source\Repos\Sales-Database\bin\Debug\Assignment1-lfe-gfr-41-82.pdb
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\Assignment1-lfe-gfr-41-82.csproj.AssemblyReference.cache
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\MainWindow.g.cs
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\App.g.cs
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\Assignment1-lfe-gfr-41-82_MarkupCompile.cache
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\Assignment1-lfe-gfr-41-82_MarkupCompile.lref
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\MainWindow.baml
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\Assignment1-lfe-gfr-41-82.g.resources
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\Assignment1_lfe_gfr_41_82.Properties.Resources.resources
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\Assignment1-lfe-gfr-41-82.csproj.GenerateResource.cache
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\Assignment1-lfe-gfr-41-82.csproj.CoreCompileInputs.cache
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\Assignment1-lfe-gfr-41-82.exe
+C:\Users\Gabriel\Source\Repos\Sales-Database\obj\Debug\Assignment1-lfe-gfr-41-82.pdb
