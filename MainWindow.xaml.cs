@@ -77,6 +77,7 @@ namespace Assignment1_lfe_gfr_41_82
 
             DataGridTextColumn province = new DataGridTextColumn();
             province.Header = "Province";
+            province.Binding = new Binding("province");
 
             dataGridProducts.Columns.Add(productCategory);
             dataGridProducts.Columns.Add(productSubCategory);
