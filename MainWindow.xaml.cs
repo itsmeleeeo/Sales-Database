@@ -149,6 +149,12 @@ namespace Assignment1_lfe_gfr_41_82
 
         private void ShippingMode()
         {
+            foreach(ProductInfo pi in myStore)
+            {
+                ListViewItem l = new ListViewItem();
+                l.Content = pi.shippingMode.Distinct();
+                shippingListBox.Items.Add(l);
+            }
 
         }
     }
