@@ -7,12 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="dataGridProducts" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,0,10,300"/>
+        <DataGrid x:Name="dataGridProducts" Margin="10,0,10,300"/>
         <Label Content="Average Transaction" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtAverageTransaction" HorizontalAlignment="Left" Margin="131,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
         <TextBox x:Name="txtTotalTransactions" HorizontalAlignment="Left" Margin="715,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75
                  " IsEnabled="False"/>
         <Label Content="Total Transaction" HorizontalAlignment="Left" Margin="612,138,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="listSubCat" HorizontalAlignment="Left" Height="245" Margin="10,165,0,0" VerticalAlignment="Top" Width="117"/>
 
     </Grid>
 </Window>
