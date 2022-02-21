@@ -34,6 +34,9 @@ namespace Assignment1_lfe_gfr_41_82
             TotalTransactions();
             AverageTransaction();
             populateProductCategory();
+            populateSubProductCategory();
+            populateShippingMode();
+            populateProvince();
         }
 
         private void initializeDataGrid()
@@ -114,19 +117,30 @@ namespace Assignment1_lfe_gfr_41_82
         }
         private void populateSubProductCategory()
         {
-            var productSubCategory = from p in myStore
-                                  select p.productSubCategory;
+            var productSubCategory = myStore.OrderBy(x => x.productSubCategory);
+            var orderProductSubCategory = productSubCategory.Select(x => x.productSubCategory).Distinct();
+            foreach (var p in orderProductSubCategory)
+            {
+                listSubCat.Items.Add(p.Trim());
+            }
         }
 
-        private void populateShippingMode()
+            private void populateShippingMode()
         {
-            var productShippingMode = from p in myStore
-                                     select p.shippingMode;
+            var productShippingMode = myStore.Select(x => x.shippingMode).Distinct();
+            foreach (var p in productShippingMode)
+            {
+                listShi.Items.Add(p.Trim());
+            }
         }
         private void populateProvince()
         {
-            var productProvince = from p in myStore
-                                      select p.province;
+            var productProvin = myStore.OrderBy(x => x.province);
+            var orderedProvince = productProvin.Select(x => x.province).Distinct();
+            foreach (var p in orderedProvince)
+            {
+                listProv.Items.Add(p.Trim());
+            }
         }
 
         private void AverageTransaction()

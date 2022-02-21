@@ -15,7 +15,7 @@
         <Label Content="Total Transaction" HorizontalAlignment="Left" Margin="612,138,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="listSubCat" HorizontalAlignment="Left" Height="245" Margin="10,165,0,0" VerticalAlignment="Top" Width="117"/>
         <ListBox x:Name="listCat" HorizontalAlignment="Left" Height="97" Margin="142,165,0,0" VerticalAlignment="Top" Width="117"/>
-        <ListBox x:Name="lisShi" HorizontalAlignment="Left" Height="123" Margin="142,287,0,0" VerticalAlignment="Top" Width="117"/>
+        <ListBox x:Name="listShi" HorizontalAlignment="Left" Height="123" Margin="142,287,0,0" VerticalAlignment="Top" Width="117"/>
         <ListBox x:Name="listProv" HorizontalAlignment="Left" Height="245" Margin="277,165,0,0" VerticalAlignment="Top" Width="117"/>
 
     </Grid>
