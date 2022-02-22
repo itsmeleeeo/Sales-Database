@@ -23,6 +23,7 @@ namespace Assignment1_lfe_gfr_41_82
     public partial class MainWindow : Window
     {
         List<ProductInfo> myStore = new List<ProductInfo>();
+        List<ProductInfo> filteredData = new List<ProductInfo>();
         public MainWindow()
         {
             InitializeComponent();
@@ -206,6 +207,16 @@ namespace Assignment1_lfe_gfr_41_82
                 filteredDataGrid.Items.Add(pi);
             }
         }
+        private void updateSelectedInfo(object o, EventArgs ea)
+        {
+            var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Name);
+
+            var provinceSelected = from p in myStore
+                                   join newListProvince in selectedProvinces on p.province equals newListProvince
+                                   select p;
+
+            filteredData = provinceSelected.ToList();
+
 
         private void PopulateTotalCustomers()
         {
