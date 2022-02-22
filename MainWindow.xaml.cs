@@ -40,6 +40,9 @@ namespace Assignment1_lfe_gfr_41_82
             populateProvince();
             FilteredDataGrid();
             PopulateFilteredDataGrid();
+            PopulateTotalCustomers();
+            PopulateTotalOrders();
+            PopulateTotalProfit();
         }
 
         private void initializeDataGrid()
@@ -214,6 +217,24 @@ namespace Assignment1_lfe_gfr_41_82
 
             filteredData = provinceSelected.ToList();
 
+
+        private void PopulateTotalCustomers()
+        {
+            var totalCustomers = myStore.Select(x => x.customerName).Distinct();
+            var customerCount = totalCustomers.Count();
+            txtTotalCustomers.Text = customerCount.ToString();
+        }
+
+        private void PopulateTotalOrders()
+        {
+            var totalOrders = myStore.Select(x => x.orderQuantity).Sum();
+            txtTotalOrders.Text = totalOrders.ToString();
+        }
+
+        private void PopulateTotalProfit()
+        {
+            var totalProfit = myStore.Select(x => x.profit).Sum();
+            txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
         }
     }
 }
