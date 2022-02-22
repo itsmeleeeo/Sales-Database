@@ -19,6 +19,11 @@
         <ListBox x:Name="listProv" HorizontalAlignment="Left" Height="245" Margin="277,165,0,0" VerticalAlignment="Top" Width="117"/>
         <DataGrid x:Name="filteredDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="400,169,10,146"/>
         <Label Content="Total Customers" HorizontalAlignment="Left" Margin="400,293,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtTotalCustomers" HorizontalAlignment="Left" Margin="500,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" IsEnabled="False"/>
+        <Label Content="Total Orders" HorizontalAlignment="Left" Margin="400,323,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtTotalOrders" HorizontalAlignment="Left" Margin="500,327,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" IsEnabled="False"/>
+        <TextBox x:Name="txtTotalProfits" HorizontalAlignment="Left" Margin="500,354,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" IsEnabled="False"/>
+        <Label Content="Total Profits" HorizontalAlignment="Left" Margin="401,350,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
