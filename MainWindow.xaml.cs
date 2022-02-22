@@ -33,7 +33,12 @@ namespace Assignment1_lfe_gfr_41_82
             populateDataGrid();
             TotalTransactions();
             AverageTransaction();
-            ShippingMode();
+            populateProductCategory();
+            populateSubProductCategory();
+            populateShippingMode();
+            populateProvince();
+            FilteredDataGrid();
+            PopulateFilteredDataGrid();
         }
 
         private void initializeDataGrid()
@@ -105,25 +110,39 @@ namespace Assignment1_lfe_gfr_41_82
 
         private void populateProductCategory()
         {
-            var productCategory = from p in myStore
-                                  select p.productCategory;
+            var productCategory = myStore.Select(x => x.productCategory).Distinct();
+            foreach (var p in productCategory)
+            {
+                listCat.Items.Add(p.Trim());
+            }
 
         }
         private void populateSubProductCategory()
         {
-            var productSubCategory = from p in myStore
-                                  select p.productSubCategory;
+            var productSubCategory = myStore.OrderBy(x => x.productSubCategory);
+            var orderProductSubCategory = productSubCategory.Select(x => x.productSubCategory).Distinct();
+            foreach (var p in orderProductSubCategory)
+            {
+                listSubCat.Items.Add(p.Trim());
+            }
         }
 
-        private void populateShippingMode()
+            private void populateShippingMode()
         {
-            var productShippingMode = from p in myStore
-                                     select p.shippingMode;
+            var productShippingMode = myStore.Select(x => x.shippingMode).Distinct();
+            foreach (var p in productShippingMode)
+            {
+                listShi.Items.Add(p.Trim());
+            }
         }
         private void populateProvince()
         {
-            var productProvince = from p in myStore
-                                      select p.province;
+            var productProvin = myStore.OrderBy(x => x.province);
+            var orderedProvince = productProvin.Select(x => x.province).Distinct();
+            foreach (var p in orderedProvince)
+            {
+                listProv.Items.Add(p.Trim());
+            }
         }
 
         private void AverageTransaction()
@@ -143,9 +162,46 @@ namespace Assignment1_lfe_gfr_41_82
             txtTotalTransactions.Text = totalTransactions.ToString();
         }
 
-        private void ShippingMode()
+        private void FilteredDataGrid()
         {
+            DataGridTextColumn customerName = new DataGridTextColumn();
+            customerName.Header = "Customer Name";
+            customerName.Binding = new Binding("customerName");
 
+            DataGridTextColumn orderQuantity = new DataGridTextColumn();
+            orderQuantity.Header = "Order Quantity";
+            orderQuantity.Binding = new Binding("orderQuantity");
+
+            DataGridTextColumn unitPrice = new DataGridTextColumn();
+            unitPrice.Header = "Unit Price";
+            unitPrice.Binding = new Binding("unitPrice");
+
+            DataGridTextColumn subTotal = new DataGridTextColumn();
+            subTotal.Header = "Sub Total";
+            subTotal.Binding = new Binding("sales");
+
+            DataGridTextColumn profit = new DataGridTextColumn();
+            profit.Header = "Profit";
+            profit.Binding = new Binding("profit");
+
+            DataGridTextColumn customerSegment = new DataGridTextColumn();
+            customerSegment.Header = "Customer Segment";
+            customerSegment.Binding = new Binding("customerSegment");
+
+            filteredDataGrid.Columns.Add(customerName);
+            filteredDataGrid.Columns.Add(orderQuantity);
+            filteredDataGrid.Columns.Add(unitPrice);
+            filteredDataGrid.Columns.Add(subTotal);
+            filteredDataGrid.Columns.Add(profit);
+            filteredDataGrid.Columns.Add(customerSegment);
+        }
+
+        private void PopulateFilteredDataGrid()
+        {
+            foreach(ProductInfo pi in myStore)
+            {
+                filteredDataGrid.Items.Add(pi);
+            }
         }
     }
 }
