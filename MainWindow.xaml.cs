@@ -33,11 +33,12 @@ namespace Assignment1_lfe_gfr_41_82
             populateDataGrid();
             TotalTransactions();
             AverageTransaction();
-            ShippingMode();
             populateProductCategory();
             populateSubProductCategory();
             populateShippingMode();
             populateProvince();
+            FilteredDataGrid();
+            PopulateFilteredDataGrid();
         }
 
         private void initializeDataGrid()
@@ -161,15 +162,46 @@ namespace Assignment1_lfe_gfr_41_82
             txtTotalTransactions.Text = totalTransactions.ToString();
         }
 
-        private void ShippingMode()
+        private void FilteredDataGrid()
+        {
+            DataGridTextColumn customerName = new DataGridTextColumn();
+            customerName.Header = "Customer Name";
+            customerName.Binding = new Binding("customerName");
+
+            DataGridTextColumn orderQuantity = new DataGridTextColumn();
+            orderQuantity.Header = "Order Quantity";
+            orderQuantity.Binding = new Binding("orderQuantity");
+
+            DataGridTextColumn unitPrice = new DataGridTextColumn();
+            unitPrice.Header = "Unit Price";
+            unitPrice.Binding = new Binding("unitPrice");
+
+            DataGridTextColumn subTotal = new DataGridTextColumn();
+            subTotal.Header = "Sub Total";
+            subTotal.Binding = new Binding("sales");
+
+            DataGridTextColumn profit = new DataGridTextColumn();
+            profit.Header = "Profit";
+            profit.Binding = new Binding("profit");
+
+            DataGridTextColumn customerSegment = new DataGridTextColumn();
+            customerSegment.Header = "Customer Segment";
+            customerSegment.Binding = new Binding("customerSegment");
+
+            filteredDataGrid.Columns.Add(customerName);
+            filteredDataGrid.Columns.Add(orderQuantity);
+            filteredDataGrid.Columns.Add(unitPrice);
+            filteredDataGrid.Columns.Add(subTotal);
+            filteredDataGrid.Columns.Add(profit);
+            filteredDataGrid.Columns.Add(customerSegment);
+        }
+
+        private void PopulateFilteredDataGrid()
         {
             foreach(ProductInfo pi in myStore)
             {
-                ListViewItem l = new ListViewItem();
-                l.Content = pi.shippingMode.Distinct();
-                shippingListBox.Items.Add(l);
+                filteredDataGrid.Items.Add(pi);
             }
-
         }
     }
 }
