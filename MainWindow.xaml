@@ -17,7 +17,7 @@
         <ListBox x:Name="listCat" HorizontalAlignment="Left" Height="97" Margin="142,165,0,0" VerticalAlignment="Top" Width="117"/>
         <ListBox x:Name="listShi" HorizontalAlignment="Left" Height="123" Margin="142,287,0,0" VerticalAlignment="Top" Width="117"/>
         <ListBox x:Name="listProv" HorizontalAlignment="Left" Height="245" Margin="277,165,0,0" VerticalAlignment="Top" Width="117"/>
-        <DataGrid x:Name="filteredDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="400,169,10,146"/>
+        <DataGrid x:Name="filteredDataGrid"  Margin="400,169,10,146"/>
         <Label Content="Total Customers" HorizontalAlignment="Left" Margin="400,293,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtTotalCustomers" HorizontalAlignment="Left" Margin="500,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" IsEnabled="False"/>
         <Label Content="Total Orders" HorizontalAlignment="Left" Margin="400,323,0,0" VerticalAlignment="Top"/>

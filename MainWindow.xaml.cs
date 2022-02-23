@@ -43,6 +43,7 @@ namespace Assignment1_lfe_gfr_41_82
             PopulateTotalCustomers();
             PopulateTotalOrders();
             PopulateTotalProfit();
+            listProv.SelectionChanged += updateSelectedInfo;
         }
 
         private void initializeDataGrid()
@@ -131,7 +132,7 @@ namespace Assignment1_lfe_gfr_41_82
             }
         }
 
-            private void populateShippingMode()
+        private void populateShippingMode()
         {
             var productShippingMode = myStore.Select(x => x.shippingMode).Distinct();
             foreach (var p in productShippingMode)
@@ -207,18 +208,22 @@ namespace Assignment1_lfe_gfr_41_82
                 filteredDataGrid.Items.Add(pi);
             }
         }
-<<<<<<< HEAD
         private void updateSelectedInfo(object o, EventArgs ea)
         {
-            var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Name);
+          //  var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Content);
 
             var provinceSelected = from p in myStore
-                                   join newListProvince in selectedProvinces on p.province equals newListProvince
+                                   where p.province == Convert.ToString(listProv.SelectedItem.ToString()) //&&
+                                  // p.shippingMode == Convert.ToString(listShi.SelectedItem.ToString())
                                    select p;
-
-            filteredData = provinceSelected.ToList();
-
-=======
+            filteredDataGrid.Items.Clear();
+           foreach(ProductInfo p in provinceSelected)
+            {
+                filteredDataGrid.Items.Add(p);
+            }
+            var totalTransactionsFiltered = provinceSelected.Count();
+            txtTotalTransactions.Text = totalTransactionsFiltered.ToString();
+        }
 
         private void PopulateTotalCustomers()
         {
@@ -237,7 +242,6 @@ namespace Assignment1_lfe_gfr_41_82
         {
             var totalProfit = myStore.Select(x => x.profit).Sum();
             txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
->>>>>>> fa5e418005d6ea65fcce6cb57ab7744ccabb9384
         }
     }
 }
