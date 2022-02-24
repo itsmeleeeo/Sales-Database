@@ -62,7 +62,6 @@ namespace Assignment1_lfe_gfr_41_82
             {
                 listProv.SelectionChanged -= updateSelectedInfo;
             }
-
         }
 
         private void initializeDataGrid()
