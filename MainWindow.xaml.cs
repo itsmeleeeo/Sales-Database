@@ -120,6 +120,7 @@ namespace Assignment1_lfe_gfr_41_82
             {
                 listCat.Items.Add(p.Trim());
             }
+            listCat.SelectAll();
 
         }
         private void populateSubProductCategory()
@@ -134,11 +135,13 @@ namespace Assignment1_lfe_gfr_41_82
 
         private void populateShippingMode()
         {
+            
             var productShippingMode = myStore.Select(x => x.shippingMode).Distinct();
             foreach (var p in productShippingMode)
             {
                 listShi.Items.Add(p.Trim());
             }
+            listShi.SelectAll();
         }
         private void populateProvince()
         {
@@ -210,9 +213,10 @@ namespace Assignment1_lfe_gfr_41_82
         }
         private void updateSelectedInfo(object o, EventArgs ea)
         {
-          //  var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Content);
-
+              var selectedProvinces = listProv.Items.OfType<string>();
+            try { 
             var provinceSelected = from p in myStore
+                                  // join province in selectedProvinces on p.province equals province
                                    where p.province == Convert.ToString(listProv.SelectedItem.ToString()) //&&
                                   // p.shippingMode == Convert.ToString(listShi.SelectedItem.ToString())
                                    select p;
@@ -221,8 +225,13 @@ namespace Assignment1_lfe_gfr_41_82
             {
                 filteredDataGrid.Items.Add(p);
             }
-            var totalTransactionsFiltered = provinceSelected.Count();
-            txtTotalTransactions.Text = totalTransactionsFiltered.ToString();
+            string totalTransactionsFiltered = provinceSelected.Count().ToString();
+            txtTotalTransactions.Text = totalTransactionsFiltered;
+            }
+            catch(Exception ex)
+            {
+                
+            }
         }
 
         private void PopulateTotalCustomers()
