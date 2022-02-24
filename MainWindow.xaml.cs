@@ -45,7 +45,9 @@ namespace Assignment1_lfe_gfr_41_82
             PopulateTotalCustomers();
             PopulateTotalOrders();
             PopulateTotalProfit();
-            
+
+            listShi.SelectionChanged += UpdateSelectShipping;
+            listSubCat.SelectionChanged += UpdateSubCategories;
             listProv.SelectionChanged += updateSelectedInfo;
             
 
@@ -234,8 +236,8 @@ namespace Assignment1_lfe_gfr_41_82
 
             var selectedProvinces = listProv.SelectedItems.OfType<string>();
             var selectedCategories = listCat.SelectedItems.OfType<string>();
-            var selectedSubCategories = listSubCat.SelectedItems.OfType<string>();
-            var selecShipping = listShi.SelectedItems.OfType<string>();
+            
+            
 
             var provinceSelected = from p in myStore
                                    join province in selectedProvinces on p.province equals province 
@@ -245,13 +247,9 @@ namespace Assignment1_lfe_gfr_41_82
                                      join categories in selectedCategories on p.productCategory equals categories
                                      select p;
 
-            var subCategoriesSelected = from p in myStore
-                                        join subcategories in selectedSubCategories on p.productSubCategory equals subcategories
-                                        select p;
+            
 
-            var filteredShipping = from p in myStore
-                                   join shiping in selectedCategories on p.shippingMode equals shiping
-                                   select p;
+            
             if (filteredData.Count != 0 ) {
                 
             }
@@ -286,6 +284,84 @@ namespace Assignment1_lfe_gfr_41_82
             catch (Exception ex){ 
             }
             }
+
+        private void UpdateSubCategories(object o, EventArgs ea)
+        {
+            var selectedSubCategories = listSubCat.SelectedItems.OfType<string>();
+            var subCategoriesSelected = from p in myStore
+                                        join subcategories in selectedSubCategories on p.productSubCategory equals subcategories
+                                        select p;
+
+            filteredData = subCategoriesSelected.ToList();
+
+            filteredDataGrid.Items.Clear();
+
+            //var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Content);
+            try
+            {
+                filteredDataGrid.Items.Clear();
+                foreach (ProductInfo p in filteredData)
+                {
+                    filteredDataGrid.Items.Add(p);
+                }
+
+
+                //string totalTransactionsFiltered = provinceSelected.Count().ToString();
+                //Total of customers found after filtering 
+                txtTotalCustomers.Text = Convert.ToString(subCategoriesSelected.Count());
+
+                //Total of orders after filtered
+                var totalOrders = subCategoriesSelected.Select(x => x.orderQuantity).Sum();
+                txtTotalOrders.Text = totalOrders.ToString();
+
+                //Total profit after filtered
+                var totalProfit = subCategoriesSelected.Select(x => x.profit).Sum();
+                txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void UpdateSelectShipping(object o, EventArgs ea)
+        {
+            var selecShipping = listShi.SelectedItems.OfType<string>();
+            var filteredShipping = from p in myStore
+                                   join shiping in selecShipping on p.shippingMode equals shiping
+                                   select p;
+
+            filteredData = filteredShipping.ToList();
+
+            filteredDataGrid.Items.Clear();
+
+            //var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Content);
+            try
+            {
+                filteredDataGrid.Items.Clear();
+                foreach (ProductInfo p in filteredData)
+                {
+                    filteredDataGrid.Items.Add(p);
+                }
+
+
+                //string totalTransactionsFiltered = provinceSelected.Count().ToString();
+                //Total of customers found after filtering 
+                txtTotalCustomers.Text = Convert.ToString(filteredShipping.Count());
+
+                //Total of orders after filtered
+                var totalOrders = filteredShipping.Select(x => x.orderQuantity).Sum();
+                txtTotalOrders.Text = totalOrders.ToString();
+
+                //Total profit after filtered
+                var totalProfit = filteredShipping.Select(x => x.profit).Sum();
+                txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void PopulateTotalCustomers()
         {
             var totalCustomers = myStore.Select(x => x.customerName).Distinct();
