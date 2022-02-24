@@ -43,7 +43,10 @@ namespace Assignment1_lfe_gfr_41_82
             PopulateTotalCustomers();
             PopulateTotalOrders();
             PopulateTotalProfit();
+            
             listProv.SelectionChanged += updateSelectedInfo;
+            
+
         }
 
         private void initializeDataGrid()
@@ -208,32 +211,36 @@ namespace Assignment1_lfe_gfr_41_82
         {
             foreach(ProductInfo pi in myStore)
             {
-                filteredDataGrid.Items.Add(pi);
-            }
+              filteredDataGrid.Items.Add(pi);
+          }
         }
         private void updateSelectedInfo(object o, EventArgs ea)
         {
-              var selectedProvinces = listProv.Items.OfType<string>();
-            try { 
+            var selectedProvinces = listProv.Items.OfType<string>();
+
             var provinceSelected = from p in myStore
-                                  // join province in selectedProvinces on p.province equals province
-                                   where p.province == Convert.ToString(listProv.SelectedItem.ToString()) //&&
-                                  // p.shippingMode == Convert.ToString(listShi.SelectedItem.ToString())
+                                       //join province in selectedProvinces on p.province equals province
+                                   where p.province.Equals(Convert.ToString(listProv.SelectedItem.ToString())) //&&
+                                                                                                               // p.shippingMode == Convert.ToString(listShi.SelectedItem.ToString())
                                    select p;
             filteredDataGrid.Items.Clear();
-           foreach(ProductInfo p in provinceSelected)
+            foreach (ProductInfo p in provinceSelected)
             {
                 filteredDataGrid.Items.Add(p);
             }
-            string totalTransactionsFiltered = provinceSelected.Count().ToString();
-            txtTotalTransactions.Text = totalTransactionsFiltered;
-            }
-            catch(Exception ex)
-            {
-                
-            }
-        }
 
+            //string totalTransactionsFiltered = provinceSelected.Count().ToString();
+            //Total of customers found after filtering 
+            txtTotalCustomers.Text = Convert.ToString(provinceSelected.Count());
+
+            //Total of orders after filtered
+            var totalOrders = provinceSelected.Select(x => x.orderQuantity).Sum();
+            txtTotalOrders.Text = totalOrders.ToString();
+
+            //Total profit after filtered
+            var totalProfit = provinceSelected.Select(x => x.profit).Sum();
+            txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
+        }       
         private void PopulateTotalCustomers()
         {
             var totalCustomers = myStore.Select(x => x.customerName).Distinct();
