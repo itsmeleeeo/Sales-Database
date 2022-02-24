@@ -221,8 +221,8 @@ namespace Assignment1_lfe_gfr_41_82
         {
             foreach(ProductInfo pi in myStore)
             {
-                filteredDataGrid.Items.Add(pi);
-            }
+              filteredDataGrid.Items.Add(pi);
+          }
         }
         private void updateSelectedInfo(object o, EventArgs ea)
         {
@@ -240,15 +240,19 @@ namespace Assignment1_lfe_gfr_41_82
             {
                 filteredDataGrid.Items.Add(p);
             }
-            string totalTransactionsFiltered = provinceSelected.Count().ToString();
-            txtTotalTransactions.Text = totalTransactionsFiltered;
-            }
-            catch(Exception ex)
-            {
-                
-            }
-        }
 
+            //string totalTransactionsFiltered = provinceSelected.Count().ToString();
+            //Total of customers found after filtering 
+            txtTotalCustomers.Text = Convert.ToString(provinceSelected.Count());
+
+            //Total of orders after filtered
+            var totalOrders = provinceSelected.Select(x => x.orderQuantity).Sum();
+            txtTotalOrders.Text = totalOrders.ToString();
+
+            //Total profit after filtered
+            var totalProfit = provinceSelected.Select(x => x.profit).Sum();
+            txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
+        }       
         private void PopulateTotalCustomers()
         {
             var totalCustomers = myStore.Select(x => x.customerName).Distinct();
