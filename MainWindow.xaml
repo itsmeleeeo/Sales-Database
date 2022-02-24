@@ -13,9 +13,9 @@
         <TextBox x:Name="txtTotalTransactions" HorizontalAlignment="Left" Margin="715,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75
                  " IsEnabled="False"/>
         <Label Content="Total Transaction" HorizontalAlignment="Left" Margin="612,138,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="listSubCat" HorizontalAlignment="Left" Height="245" Margin="10,165,0,0" VerticalAlignment="Top" Width="117" SelectionMode="Multiple"/>
+        <ListBox x:Name="listSubCat" HorizontalAlignment="Left" Height="211" Margin="10,165,0,0" VerticalAlignment="Top" Width="117" SelectionMode="Multiple"/>
         <ListBox x:Name="listCat" HorizontalAlignment="Left" Height="97" Margin="142,165,0,0" VerticalAlignment="Top" Width="117" SelectionMode="Multiple"/>
-        <ListBox x:Name="listShi" HorizontalAlignment="Left" Height="123" Margin="142,287,0,0" VerticalAlignment="Top" Width="117" SelectionMode="Multiple"/>
+        <ListBox x:Name="listShi" HorizontalAlignment="Left" Margin="142,287,0,58" Width="117" SelectionMode="Multiple"/>
         <ListBox x:Name="listProv" HorizontalAlignment="Left" Height="245" Margin="277,165,0,0" VerticalAlignment="Top" Width="117" SelectionMode="Multiple"/>
         <DataGrid x:Name="filteredDataGrid"  Margin="400,169,10,146"/>
         <Label Content="Total Customers" HorizontalAlignment="Left" Margin="400,293,0,0" VerticalAlignment="Top"/>
@@ -24,6 +24,9 @@
         <TextBox x:Name="txtTotalOrders" HorizontalAlignment="Left" Margin="500,327,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" IsEnabled="False"/>
         <TextBox x:Name="txtTotalProfits" HorizontalAlignment="Left" Margin="500,354,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" IsEnabled="False"/>
         <Label Content="Total Profits" HorizontalAlignment="Left" Margin="401,350,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnReset" Content="Reset" HorizontalAlignment="Left" Margin="10,395,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chboxProfit" Content="Profit Margin Filter" HorizontalAlignment="Left" Margin="87,398,0,0" VerticalAlignment="Top" Checked="chboxProfit_Checked"/>
+        <TextBox x:Name="txtProfitMargin" HorizontalAlignment="Left" Margin="225,397,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" IsEnabled="False"/>
 
     </Grid>
 </Window>

@@ -30,6 +30,8 @@ namespace Assignment1_lfe_gfr_41_82
             string fileContents = FileService.ReadFile(@"..\..\Data\Assignment1.psv");
             myStore = ProductInfoParser.ParseRoster(fileContents);
 
+            ToggleEventHandler(false);
+
             initializeDataGrid();
             populateDataGrid();
             TotalTransactions();
@@ -43,7 +45,18 @@ namespace Assignment1_lfe_gfr_41_82
             PopulateTotalCustomers();
             PopulateTotalOrders();
             PopulateTotalProfit();
-            listProv.SelectionChanged += updateSelectedInfo;
+            ToggleEventHandler(true);
+        }
+
+        private void ToggleEventHandler(bool toggle)
+        {
+            if(toggle)
+            {
+                listProv.SelectionChanged += updateSelectedInfo;
+            } else
+            {
+                listProv.SelectionChanged -= updateSelectedInfo;
+            }
         }
 
         private void initializeDataGrid()
@@ -213,14 +226,16 @@ namespace Assignment1_lfe_gfr_41_82
         }
         private void updateSelectedInfo(object o, EventArgs ea)
         {
-              var selectedProvinces = listProv.Items.OfType<string>();
-            try { 
-            var provinceSelected = from p in myStore
-                                  // join province in selectedProvinces on p.province equals province
-                                   where p.province == Convert.ToString(listProv.SelectedItem.ToString()) //&&
-                                  // p.shippingMode == Convert.ToString(listShi.SelectedItem.ToString())
-                                   select p;
-            filteredDataGrid.Items.Clear();
+              var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Content);
+            try {
+                var provinceSelected = from p in myStore
+                    // join province in selectedProvinces on p.province equals province
+                where p.province == Convert.ToString(listProv.SelectedItem.ToString()) //&&
+                                                                                       // p.shippingMode == Convert.ToString(listShi.SelectedItem.ToString())
+                select p;
+
+
+                filteredDataGrid.Items.Clear();
            foreach(ProductInfo p in provinceSelected)
             {
                 filteredDataGrid.Items.Add(p);
@@ -251,6 +266,14 @@ namespace Assignment1_lfe_gfr_41_82
         {
             var totalProfit = myStore.Select(x => x.profit).Sum();
             txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
+        }
+
+        private void chboxProfit_Checked(object sender, RoutedEventArgs e)
+        {
+            if(chboxProfit.IsChecked == true)
+            {
+                txtProfitMargin.IsEnabled = true;
+            }
         }
     }
 }
