@@ -22,16 +22,20 @@ namespace Assignment1_lfe_gfr_41_82
     /// </summary>
     public partial class MainWindow : Window
     {
+        //initialize the objects
         List<ProductInfo> myStore = new List<ProductInfo>();
         List<ProductInfo> filteredData = new List<ProductInfo>();
         public MainWindow()
         {
             InitializeComponent();
+            //reading the file from the file serivce
             string fileContents = FileService.ReadFile(@"..\..\Data\Assignment1.psv");
+            //saving into list our file parser
             myStore = ProductInfoParser.ParseRoster(fileContents);
 
             ToggleEventHandler(false);
 
+            //all methods that calls datagrids, bindings and event handlers
             initializeDataGrid();
             populateDataGrid();
             TotalTransactions();
@@ -45,6 +49,7 @@ namespace Assignment1_lfe_gfr_41_82
             PopulateTotalCustomers();
             PopulateTotalOrders();
             PopulateTotalProfit();
+
             chboxProfit.Unchecked += chboxProfit_Unchecked;
             chboxProfit.Checked += chboxProfit_Checked;
             listShi.SelectionChanged += UpdateSelectShipping;
@@ -54,7 +59,7 @@ namespace Assignment1_lfe_gfr_41_82
 
             ToggleEventHandler(true);
         }
-
+        //filter the provinces
         private void ToggleEventHandler(bool toggle)
         {
             if(toggle)
@@ -68,6 +73,7 @@ namespace Assignment1_lfe_gfr_41_82
 
         private void initializeDataGrid()
         {
+            //setting the columns and binding the data to columns
             DataGridTextColumn productCategory = new DataGridTextColumn();
             productCategory.Header = "Product Category";
             productCategory.Binding = new Binding("productCategory");
@@ -127,6 +133,7 @@ namespace Assignment1_lfe_gfr_41_82
 
         private void populateDataGrid()
         {
+            //populating the datagrid with the file data
             foreach(ProductInfo pi in myStore)
             {
                 dataGridProducts.Items.Add(pi);
@@ -391,13 +398,22 @@ namespace Assignment1_lfe_gfr_41_82
         private void txtProfitMargin_TextChanged(object sender, TextChangedEventArgs e)
         {
             double profitMargin = 0.0;
-            var profit = Convert.ToDouble(txtProfitMargin.Text);
-            var subtotal = from s in myStore
-                           select s.sales;
-
-            for(int i = 0; i < subtotal.Count(); i++)
+            double profit = 0.0;
+            if(double.TryParse(txtProfitMargin.Text, out profit) == false)
             {
-                profitMargin = (profit / subtotal.ElementAt(i)) * 100;
+                MessageBox.Show("You must enter an integer for the profit filter");
+            }
+
+            var subtotal = from s in myStore
+                           join sm in myStore on s.profit  equals sm.profit 
+                           where (s.profit / (s.orderQuantity * s.unitPrice)) * 100 >= profitMargin
+                           select s;
+
+            filteredDataGrid.Items.Clear(); 
+
+           foreach(ProductInfo s in subtotal)
+            {
+                filteredDataGrid.Items.Add(s);
             }
         }
     }

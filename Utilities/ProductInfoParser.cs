@@ -10,6 +10,7 @@ namespace Assignment1_lfe_gfr_41_82.Utilities
 {
     class ProductInfoParser
     {
+        //file reader
         public static List<ProductInfo> storage = new List<ProductInfo>();
 
         public static List<ProductInfo> ParseRoster(string fileContents)
@@ -18,7 +19,7 @@ namespace Assignment1_lfe_gfr_41_82.Utilities
 
             foreach(string line in lines)
             {
-                //string[] fields = line.Trim().Split('\u002C');
+                //spliting the lines that are separated by pipes
                 string[] fields = line.Trim().Split('|');
 
                 if(fields.Length != 12)
@@ -26,7 +27,7 @@ namespace Assignment1_lfe_gfr_41_82.Utilities
                 } else {
                     try
                     {
-
+                        //adding all values to it's field and binding it to the object
                         ProductInfo np = new ProductInfo(
                             Convert.ToInt32(fields[0]),
                             Convert.ToInt32(fields[1]),
