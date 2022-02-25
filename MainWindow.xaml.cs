@@ -22,6 +22,7 @@ namespace Assignment1_lfe_gfr_41_82
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         List<ProductInfo> myStore = new List<ProductInfo>();
         List<ProductInfo> filteredData = new List<ProductInfo>();
         public MainWindow()
@@ -45,12 +46,15 @@ namespace Assignment1_lfe_gfr_41_82
             PopulateTotalCustomers();
             PopulateTotalOrders();
             PopulateTotalProfit();
-            chboxProfit.Unchecked += chboxProfit_Unchecked;
-            chboxProfit.Checked += chboxProfit_Checked;
-            listShi.SelectionChanged += UpdateSelectShipping;
-            listSubCat.SelectionChanged += UpdateSubCategories;
-            listProv.SelectionChanged += updateProvinceFilter;
-            listCat.SelectionChanged += updateCategoriesFilter;
+
+            
+            //chboxProfit.Unchecked += chboxProfit_Unchecked;
+            //chboxProfit.Checked += chboxProfit_Checked;
+            //listShi.SelectionChanged += UpdateSelectShipping;
+            //listSubCat.SelectionChanged += UpdateSubCategories;
+            //listProv.SelectionChanged += updateProvinceFilter;
+            //listCat.SelectionChanged += updateCategoriesFilter;
+            txtProfitMargin.TextChanged += txtProfitMargin_TextChanged;
 
             ToggleEventHandler(true);
         }
@@ -87,10 +91,13 @@ namespace Assignment1_lfe_gfr_41_82
             DataGridTextColumn sales = new DataGridTextColumn();
             sales.Header = "Sales";
             sales.Binding = new Binding("sales");
+            sales.Binding.StringFormat = "$00.00";
+           
 
             DataGridTextColumn unitPrice = new DataGridTextColumn();
             unitPrice.Header = "Unit Price";
             unitPrice.Binding = new Binding("unitPrice");
+            unitPrice.Binding.StringFormat = "$00.00";
 
             DataGridTextColumn shippingMode = new DataGridTextColumn();
             shippingMode.Header = "Shipping Mode";
@@ -99,6 +106,7 @@ namespace Assignment1_lfe_gfr_41_82
             DataGridTextColumn profit = new DataGridTextColumn();
             profit.Header = "Profit";
             profit.Binding = new Binding("profit");
+            profit.Binding.StringFormat = "$00.00";
 
             DataGridTextColumn customerName = new DataGridTextColumn();
             customerName.Header = "Customer Name";
@@ -203,14 +211,17 @@ namespace Assignment1_lfe_gfr_41_82
             DataGridTextColumn unitPrice = new DataGridTextColumn();
             unitPrice.Header = "Unit Price";
             unitPrice.Binding = new Binding("unitPrice");
+            unitPrice.Binding.StringFormat = "$00.00";
 
             DataGridTextColumn subTotal = new DataGridTextColumn();
             subTotal.Header = "Sub Total";
-            subTotal.Binding = new Binding("sales");
+            subTotal.Binding = new Binding("subTotal");
+            subTotal.Binding.StringFormat = "$00.00";
 
             DataGridTextColumn profit = new DataGridTextColumn();
             profit.Header = "Profit";
             profit.Binding = new Binding("profit");
+            profit.Binding.StringFormat = "$00.00";
 
             DataGridTextColumn customerSegment = new DataGridTextColumn();
             customerSegment.Header = "Customer Segment";
@@ -229,7 +240,7 @@ namespace Assignment1_lfe_gfr_41_82
             foreach(ProductInfo pi in myStore)
             {
               filteredDataGrid.Items.Add(pi);
-          }
+            }
         }
         private void updateProvinceFilter(object o, EventArgs ea)
         {
@@ -275,38 +286,7 @@ namespace Assignment1_lfe_gfr_41_82
             var categoriesSelected = from p in myStore
                                      join categories in selectedCategories on p.productCategory equals categories
                                      select p;
-            //if (filteredData.Count != 0)
-            //{
-            //    List<ProductInfo> newFilterCat = filteredData.Where(x => categoriesSelected.Contains(x)).ToList();
-            //    filteredData = newFilterCat.ToList();
-            //    try
-            //    {
-            //        filteredDataGrid.Items.Clear();
-            //        foreach (ProductInfo p in filteredData)
-            //        {
-            //            filteredDataGrid.Items.Add(p);
-            //        }
-
-
-            //        //string totalTransactionsFiltered = provinceSelected.Count().ToString();
-            //        //Total of customers found after filtering 
-            //        txtTotalCustomers.Text = Convert.ToString(filteredData.Count());
-
-            //        //Total of orders after filtered
-            //        var totalOrders = filteredData.Select(x => x.orderQuantity).Sum();
-            //        txtTotalOrders.Text = totalOrders.ToString();
-
-            //        //Total profit after filtered
-            //        var totalProfit = filteredData.Select(x => x.profit).Sum();
-            //        txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //    }
-            //}
-            //else
-            //{
-                filteredData = categoriesSelected.ToList();
+            filteredData = categoriesSelected.ToList();
             UpdateFilteredDataGrid();
         }
       
@@ -390,15 +370,26 @@ namespace Assignment1_lfe_gfr_41_82
 
         private void txtProfitMargin_TextChanged(object sender, TextChangedEventArgs e)
         {
-            double profitMargin = 0.0;
-            var profit = Convert.ToDouble(txtProfitMargin.Text);
-            var subtotal = from s in myStore
-                           select s.sales;
 
-            for(int i = 0; i < subtotal.Count(); i++)
+           
+            var profit = Convert.ToDouble(txtProfitMargin.Text);
+           var subTotal = from s in myStore
+                           where s.ProfitMargin >= profit
+                           select s;
+            filteredData = subTotal.ToList();
+           //var subtotal = from s in myStore
+           //                join sn in myStore on s.ProfitMargin equals profit
+           //                where s.ProfitMargin >= profit
+           //                select s;
+            foreach (ProductInfo p in filteredData)
             {
-                profitMargin = (profit / subtotal.ElementAt(i)) * 100;
+                filteredDataGrid.Items.Add(p);
             }
+            //for(int i = 0; i < subtotal.Count(); i++)
+            //{
+            //    profitMargin = (profit / subtotal.ElementAt(i)) * 100;
+            //}
         }
+       
     }
 }
