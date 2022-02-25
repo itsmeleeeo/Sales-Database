@@ -379,6 +379,7 @@ namespace Assignment1_lfe_gfr_41_82
             }
         }
         //check if the user has entered the right value integer or not then check in the list the profit related to that percentage and filter the list
+        //Gabriel and I could filter by the a profit margin however we could not make the profit margin work together withh other filters, I am sorry.
         private void ProfitMarginEventHandler(object o, EventArgs ea)
         {
             int profitMargin = 0;
@@ -398,7 +399,7 @@ namespace Assignment1_lfe_gfr_41_82
             {
                 filteredDataGrid.Items.Add(s);
             }
-
+            profitMargin = 0;
         }
        private void ButtonReset(object o,EventArgs ea)
         {
