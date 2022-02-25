@@ -26,7 +26,7 @@
         <Label Content="Total Profits" HorizontalAlignment="Left" Margin="401,350,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnReset" Content="Reset" HorizontalAlignment="Left" Margin="10,395,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="chboxProfit" Content="Profit Margin Filter" HorizontalAlignment="Left" Margin="87,398,0,0" VerticalAlignment="Top" Checked="chboxProfit_Checked"/>
-        <TextBox x:Name="txtProfitMargin" HorizontalAlignment="Left" Margin="225,397,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" IsEnabled="False"/>
+        <TextBox x:Name="txtProfitMargin" HorizontalAlignment="Left" Margin="225,397,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" IsEnabled="False" TextChanged="txtProfitMargin_TextChanged"/>
 
     </Grid>
 </Window>

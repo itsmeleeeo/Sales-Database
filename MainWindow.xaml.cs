@@ -388,5 +388,18 @@ namespace Assignment1_lfe_gfr_41_82
                 txtProfitMargin.IsEnabled = true;
             }
         }
+
+        private void txtProfitMargin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            double profitMargin = 0.0;
+            var profit = Convert.ToDouble(txtProfitMargin.Text);
+            var subtotal = from s in myStore
+                           select s.sales;
+
+            for(int i = 0; i < subtotal.Count(); i++)
+            {
+                profitMargin = (profit / subtotal.ElementAt(i)) * 100;
+            }
+        }
     }
 }
