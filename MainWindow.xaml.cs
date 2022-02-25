@@ -72,10 +72,6 @@ namespace Assignment1_lfe_gfr_41_82
                 listProv.SelectionChanged -= updateProvinceFilter;
             }
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> 022207dba77ff8b4925e05aafbcb360a87c50ec1
         //setting the columns and binding the data to columns
         private void initializeDataGrid()
         {
