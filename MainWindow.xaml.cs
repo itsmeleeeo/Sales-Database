@@ -72,6 +72,10 @@ namespace Assignment1_lfe_gfr_41_82
                 listProv.SelectionChanged -= updateProvinceFilter;
             }
         }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 022207dba77ff8b4925e05aafbcb360a87c50ec1
         //setting the columns and binding the data to columns
         private void initializeDataGrid()
         {
@@ -169,7 +173,6 @@ namespace Assignment1_lfe_gfr_41_82
         //select shipment and check whether has duplicated values or not and add into the list
         private void populateShippingMode()
         {
-            
             var productShippingMode = myStore.Select(x => x.shippingMode).Distinct();
             foreach (var p in productShippingMode)
             {
@@ -206,6 +209,7 @@ namespace Assignment1_lfe_gfr_41_82
             txtTotalTransactions.Text = totalTransactions.ToString();
         }
 
+        //filtered datagrid that updates everytime an item is selected
         private void FilteredDataGrid()
         {
             //Setup the DataGrid Layout and formating by binding it to the values of the object
@@ -269,6 +273,7 @@ namespace Assignment1_lfe_gfr_41_82
             UpdateFilteredDataGrid();
         }
 
+        //update the subcategories once its select and sort them into the datagrid
         private void UpdateSubCategories(object o, EventArgs ea)
         {
             var selectedSubCategories = listSubCat.SelectedItems.OfType<string>();
@@ -281,6 +286,7 @@ namespace Assignment1_lfe_gfr_41_82
             UpdateFilteredDataGrid();
         }
 
+        //update the shipping once its select and sort them into the datagrid
         private void UpdateSelectShipping(object o, EventArgs ea)
         {
             var selecShipping = listShi.SelectedItems.OfType<string>();
@@ -292,6 +298,7 @@ namespace Assignment1_lfe_gfr_41_82
 
             UpdateFilteredDataGrid();
         }
+        //update the category once its select and sort them into the datagrid
         private void updateCategoriesFilter(object o, EventArgs ea)
         {
             var selectedCategories = listCat.SelectedItems.OfType<string>();
@@ -303,8 +310,7 @@ namespace Assignment1_lfe_gfr_41_82
             filteredData = categoriesSelected.ToList();
             UpdateFilteredDataGrid();
         }
-
-
+        
         //Those methods show on the text box the values of the list when it is first created
         private void PopulateTotalCustomers()
         {
@@ -313,6 +319,7 @@ namespace Assignment1_lfe_gfr_41_82
             txtTotalCustomers.Text = customerCount.ToString();
         }
 
+        //select total orders and sum them up and display on the screen
         private void PopulateTotalOrders()
         {
             var totalOrders = myStore.Select(x => x.orderQuantity).Sum();
@@ -412,8 +419,21 @@ namespace Assignment1_lfe_gfr_41_82
                 filteredDataGrid.Items.Add(s);
             }
             profitMargin = 0;
+
+            //Total of customers found after filtering 
+                txtTotalCustomers.Text = Convert.ToString(subtotal.Count());
+
+            //Total of orders after filtered
+            var totalOrders = subtotal.Select(x => x.orderQuantity).Sum();
+            txtTotalOrders.Text = totalOrders.ToString();
+
+            //Total profit after filtered
+            var totalProfit = subtotal.Select(x => x.profit).Sum();
+            txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
+
+
         }
-       private void ButtonReset(object o,EventArgs ea)
+        private void ButtonReset(object o,EventArgs ea)
         {
             //Reset button method, clear the list and unselected the SubCategorie and the Province filter 
             //and selec all the ones on the Shipping mode and Categories list
