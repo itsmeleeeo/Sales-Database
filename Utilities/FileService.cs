@@ -8,6 +8,7 @@ using System.Windows;
 
 namespace Assignment1_lfe_gfr_41_82.Utilities
 {
+    //class responsible to read the file 
     class FileService
     {
         static StreamReader sr;
@@ -15,7 +16,7 @@ namespace Assignment1_lfe_gfr_41_82.Utilities
         public static string ReadFile(string fileName)
         {
             string fileContents = "";
-
+            //a try catch to handling possible errors while opens the file
             try
             {
                 sr = new StreamReader(fileName);
