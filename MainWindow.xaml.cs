@@ -201,12 +201,14 @@ namespace Assignment1_lfe_gfr_41_82
         //it counts all the transacations
         private void TotalTransactions()
         {
+            
             var totalTransactions = myStore.Count();
             txtTotalTransactions.Text = totalTransactions.ToString();
         }
 
         private void FilteredDataGrid()
         {
+            //Setup the DataGrid Layout and formating by binding it to the values of the object
             DataGridTextColumn customerName = new DataGridTextColumn();
             customerName.Header = "Customer Name";
             customerName.Binding = new Binding("customerName");
@@ -242,13 +244,18 @@ namespace Assignment1_lfe_gfr_41_82
             filteredDataGrid.Columns.Add(customerSegment);
         }
 
+       
         private void PopulateFilteredDataGrid()
         {
-            foreach(ProductInfo pi in myStore)
+            //Populate the filtered Data Grid at the start of the program
+            foreach (ProductInfo pi in myStore)
             {
               filteredDataGrid.Items.Add(pi);
             }
         }
+
+        //Those Event Handlers are use to get the first update on the filteredData List
+        //and send the values to the UpdateFilteredDataGrid Method
         private void updateProvinceFilter(object o, EventArgs ea)
         {
 
@@ -296,7 +303,9 @@ namespace Assignment1_lfe_gfr_41_82
             filteredData = categoriesSelected.ToList();
             UpdateFilteredDataGrid();
         }
-      
+
+
+        //Those methods show on the text box the values of the list when it is first created
         private void PopulateTotalCustomers()
         {
             var totalCustomers = myStore.Select(x => x.customerName).Distinct();
@@ -316,6 +325,7 @@ namespace Assignment1_lfe_gfr_41_82
             txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
         }
 
+        //Methods to activate or deactivate the text box if the check box is checked or not
         private void CheckBoxChecked(object o, EventArgs ea)
         {
             txtProfitMargin.IsEnabled = true;
@@ -327,6 +337,8 @@ namespace Assignment1_lfe_gfr_41_82
 
         private void UpdateFilteredDataGrid()
         {
+            //This method receives the first filteredData value and from there it applies the other filters to it
+            //This method prints the Data Grid filtered too and count the values that should dynamically change
             var selectedCategories = listCat.SelectedItems.OfType<string>();
 
             var selecShipping = listShi.SelectedItems.OfType<string>();
@@ -403,6 +415,8 @@ namespace Assignment1_lfe_gfr_41_82
         }
        private void ButtonReset(object o,EventArgs ea)
         {
+            //Reset button method, clear the list and unselected the SubCategorie and the Province filter 
+            //and selec all the ones on the Shipping mode and Categories list
             filteredData.Clear();
             listShi.SelectAll();
             listCat.SelectAll();
