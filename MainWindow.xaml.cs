@@ -72,9 +72,9 @@ namespace Assignment1_lfe_gfr_41_82
             }
         }
 
+        //setting the columns and binding the data to columns
         private void initializeDataGrid()
         {
-            //setting the columns and binding the data to columns
             DataGridTextColumn productCategory = new DataGridTextColumn();
             productCategory.Header = "Product Category";
             productCategory.Binding = new Binding("productCategory");
@@ -136,15 +136,16 @@ namespace Assignment1_lfe_gfr_41_82
             dataGridProducts.Columns.Add(province);
         }
 
+        //populating the datagrid with the file data
         private void populateDataGrid()
         {
-            //populating the datagrid with the file data
             foreach(ProductInfo pi in myStore)
             {
                 dataGridProducts.Items.Add(pi);
             }
         }
 
+        //selecting the product categories and checking if there is any dupplicated value and adding into the list
         private void populateProductCategory()
         {
             var productCategory = myStore.Select(x => x.productCategory).Distinct();
@@ -155,6 +156,8 @@ namespace Assignment1_lfe_gfr_41_82
             listCat.SelectAll();
 
         }
+
+        //ordering the sub categories, selecting it by distinct and add into the list
         private void populateSubProductCategory()
         {
             var productSubCategory = myStore.OrderBy(x => x.productSubCategory);
@@ -165,9 +168,9 @@ namespace Assignment1_lfe_gfr_41_82
             }
         }
 
+        //selecting the type of shipment check if there is any repetition and add to the list
         private void populateShippingMode()
         {
-            
             var productShippingMode = myStore.Select(x => x.shippingMode).Distinct();
             foreach (var p in productShippingMode)
             {
@@ -175,6 +178,8 @@ namespace Assignment1_lfe_gfr_41_82
             }
             listShi.SelectAll();
         }
+
+        //checking the product by province, check duplicates and add into the list
         private void populateProvince()
         {
             var productProvin = myStore.OrderBy(x => x.province);
@@ -185,6 +190,7 @@ namespace Assignment1_lfe_gfr_41_82
             }
         }
 
+        //fetch all sales unit price and do a simple mathto return the total formated
         private void AverageTransaction()
         {
             double total = 0.0;
@@ -196,12 +202,14 @@ namespace Assignment1_lfe_gfr_41_82
             txtAverageTransaction.Text = String.Format("${0:#.00}", Convert.ToDecimal(total));
         }
 
+        //simple count of the total transactions
         private void TotalTransactions()
         {
             var totalTransactions = myStore.Count();
             txtTotalTransactions.Text = totalTransactions.ToString();
         }
 
+        //filtered datagrid that updates everytime an item is selected
         private void FilteredDataGrid()
         {
             DataGridTextColumn customerName = new DataGridTextColumn();
@@ -239,6 +247,7 @@ namespace Assignment1_lfe_gfr_41_82
             filteredDataGrid.Columns.Add(customerSegment);
         }
 
+        //adding the filtered data into 
         private void PopulateFilteredDataGrid()
         {
             foreach(ProductInfo pi in myStore)
@@ -246,6 +255,7 @@ namespace Assignment1_lfe_gfr_41_82
               filteredDataGrid.Items.Add(pi);
             }
         }
+        //updates the provinces once its selected and sort them into the datagrid
         private void updateProvinceFilter(object o, EventArgs ea)
         {
 
@@ -259,6 +269,7 @@ namespace Assignment1_lfe_gfr_41_82
             UpdateFilteredDataGrid();
         }
 
+        //update the subcategories once its select and sort them into the datagrid
         private void UpdateSubCategories(object o, EventArgs ea)
         {
             var selectedSubCategories = listSubCat.SelectedItems.OfType<string>();
@@ -271,6 +282,7 @@ namespace Assignment1_lfe_gfr_41_82
             UpdateFilteredDataGrid();
         }
 
+        //update the shipping once its select and sort them into the datagrid
         private void UpdateSelectShipping(object o, EventArgs ea)
         {
             var selecShipping = listShi.SelectedItems.OfType<string>();
@@ -282,6 +294,7 @@ namespace Assignment1_lfe_gfr_41_82
 
             UpdateFilteredDataGrid();
         }
+        //update the category once its select and sort them into the datagrid
         private void updateCategoriesFilter(object o, EventArgs ea)
         {
             var selectedCategories = listCat.SelectedItems.OfType<string>();
@@ -293,7 +306,8 @@ namespace Assignment1_lfe_gfr_41_82
             filteredData = categoriesSelected.ToList();
             UpdateFilteredDataGrid();
         }
-      
+        
+        //select all customers and check wheter has duplicated value or not and count them
         private void PopulateTotalCustomers()
         {
             var totalCustomers = myStore.Select(x => x.customerName).Distinct();
@@ -301,6 +315,7 @@ namespace Assignment1_lfe_gfr_41_82
             txtTotalCustomers.Text = customerCount.ToString();
         }
 
+        //select total orders and sum them up and display on the screen
         private void PopulateTotalOrders()
         {
             var totalOrders = myStore.Select(x => x.orderQuantity).Sum();
