@@ -23,6 +23,7 @@ namespace Assignment1_lfe_gfr_41_82
     public partial class MainWindow : Window
     {
         //initialize the objects
+        
         List<ProductInfo> myStore = new List<ProductInfo>();
         List<ProductInfo> filteredData = new List<ProductInfo>();
         public MainWindow()
@@ -49,15 +50,15 @@ namespace Assignment1_lfe_gfr_41_82
             PopulateTotalCustomers();
             PopulateTotalOrders();
             PopulateTotalProfit();
-
-            txtProfitMargin.TextChanged += txtProfitMargin_TextChanged;
-            chboxProfit.Unchecked += chboxProfit_Unchecked;
-            chboxProfit.Checked += chboxProfit_Checked;
+            
+            txtProfitMargin.TextChanged += ProfitMarginEventHandler;
+            chboxProfit.Unchecked += CheckBoxUnchecked;
+            chboxProfit.Checked += CheckBoxChecked;
             listShi.SelectionChanged += UpdateSelectShipping;
             listSubCat.SelectionChanged += UpdateSubCategories;
             listProv.SelectionChanged += updateProvinceFilter;
             listCat.SelectionChanged += updateCategoriesFilter;
-
+            btnReset.Click += ButtonReset;
             ToggleEventHandler(true);
         }
         //filter the provinces
@@ -71,7 +72,10 @@ namespace Assignment1_lfe_gfr_41_82
                 listProv.SelectionChanged -= updateProvinceFilter;
             }
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 022207dba77ff8b4925e05aafbcb360a87c50ec1
         //setting the columns and binding the data to columns
         private void initializeDataGrid()
         {
@@ -135,7 +139,6 @@ namespace Assignment1_lfe_gfr_41_82
             dataGridProducts.Columns.Add(customerSegment);
             dataGridProducts.Columns.Add(province);
         }
-
         //populating the datagrid with the file data
         private void populateDataGrid()
         {
@@ -145,7 +148,7 @@ namespace Assignment1_lfe_gfr_41_82
             }
         }
 
-        //selecting the product categories and checking if there is any dupplicated value and adding into the list
+        //select product category and check whether has duplicated category and add into the list
         private void populateProductCategory()
         {
             var productCategory = myStore.Select(x => x.productCategory).Distinct();
@@ -156,8 +159,7 @@ namespace Assignment1_lfe_gfr_41_82
             listCat.SelectAll();
 
         }
-
-        //ordering the sub categories, selecting it by distinct and add into the list
+        //select subcategory list order by and select the distinct to check whether has duplicated or not and add to the list
         private void populateSubProductCategory()
         {
             var productSubCategory = myStore.OrderBy(x => x.productSubCategory);
@@ -168,7 +170,7 @@ namespace Assignment1_lfe_gfr_41_82
             }
         }
 
-        //selecting the type of shipment check if there is any repetition and add to the list
+        //select shipment and check whether has duplicated values or not and add into the list
         private void populateShippingMode()
         {
             var productShippingMode = myStore.Select(x => x.shippingMode).Distinct();
@@ -178,8 +180,7 @@ namespace Assignment1_lfe_gfr_41_82
             }
             listShi.SelectAll();
         }
-
-        //checking the product by province, check duplicates and add into the list
+        //select and order the provinces then check whether has duplicated or not and add to the list
         private void populateProvince()
         {
             var productProvin = myStore.OrderBy(x => x.province);
@@ -189,8 +190,7 @@ namespace Assignment1_lfe_gfr_41_82
                 listProv.Items.Add(p.Trim());
             }
         }
-
-        //fetch all sales unit price and do a simple mathto return the total formated
+        //select all sales and sum them up them count the amount of transactions and check the average
         private void AverageTransaction()
         {
             double total = 0.0;
@@ -201,10 +201,10 @@ namespace Assignment1_lfe_gfr_41_82
 
             txtAverageTransaction.Text = String.Format("${0:#.00}", Convert.ToDecimal(total));
         }
-
-        //simple count of the total transactions
+        //it counts all the transacations
         private void TotalTransactions()
         {
+            
             var totalTransactions = myStore.Count();
             txtTotalTransactions.Text = totalTransactions.ToString();
         }
@@ -212,6 +212,7 @@ namespace Assignment1_lfe_gfr_41_82
         //filtered datagrid that updates everytime an item is selected
         private void FilteredDataGrid()
         {
+            //Setup the DataGrid Layout and formating by binding it to the values of the object
             DataGridTextColumn customerName = new DataGridTextColumn();
             customerName.Header = "Customer Name";
             customerName.Binding = new Binding("customerName");
@@ -247,15 +248,18 @@ namespace Assignment1_lfe_gfr_41_82
             filteredDataGrid.Columns.Add(customerSegment);
         }
 
-        //adding the filtered data into 
+       
         private void PopulateFilteredDataGrid()
         {
-            foreach(ProductInfo pi in myStore)
+            //Populate the filtered Data Grid at the start of the program
+            foreach (ProductInfo pi in myStore)
             {
               filteredDataGrid.Items.Add(pi);
             }
         }
-        //updates the provinces once its selected and sort them into the datagrid
+
+        //Those Event Handlers are use to get the first update on the filteredData List
+        //and send the values to the UpdateFilteredDataGrid Method
         private void updateProvinceFilter(object o, EventArgs ea)
         {
 
@@ -306,8 +310,9 @@ namespace Assignment1_lfe_gfr_41_82
             filteredData = categoriesSelected.ToList();
             UpdateFilteredDataGrid();
         }
-        
-        //select all customers and check wheter has duplicated value or not and count them
+
+
+        //Those methods show on the text box the values of the list when it is first created
         private void PopulateTotalCustomers()
         {
             var totalCustomers = myStore.Select(x => x.customerName).Distinct();
@@ -328,17 +333,20 @@ namespace Assignment1_lfe_gfr_41_82
             txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
         }
 
-        private void chboxProfit_Checked(object sender, RoutedEventArgs e)
+        //Methods to activate or deactivate the text box if the check box is checked or not
+        private void CheckBoxChecked(object o, EventArgs ea)
         {
             txtProfitMargin.IsEnabled = true;
         }
-        private void chboxProfit_Unchecked(object sender, RoutedEventArgs e)
+        private void CheckBoxUnchecked(object o, EventArgs ea)
         {
             txtProfitMargin.IsEnabled = false;
         }
 
         private void UpdateFilteredDataGrid()
         {
+            //This method receives the first filteredData value and from there it applies the other filters to it
+            //This method prints the Data Grid filtered too and count the values that should dynamically change
             var selectedCategories = listCat.SelectedItems.OfType<string>();
 
             var selecShipping = listShi.SelectedItems.OfType<string>();
@@ -360,8 +368,10 @@ namespace Assignment1_lfe_gfr_41_82
                                     join final in selecShipping on p.shippingMode equals final
                                     select p;
             
+            
+                filteredData = finalFilterSubCat.ToList();
+            
 
-            filteredData = finalFilterSubCat.ToList();
             try
             {
                 filteredDataGrid.Items.Clear();
@@ -369,7 +379,7 @@ namespace Assignment1_lfe_gfr_41_82
                 {
                     filteredDataGrid.Items.Add(p);
                 }
-
+                
                 //Total of customers found after filtering 
                 txtTotalCustomers.Text = Convert.ToString(filteredData.Count());
 
@@ -380,34 +390,46 @@ namespace Assignment1_lfe_gfr_41_82
                 //Total profit after filtered
                 var totalProfit = filteredData.Select(x => x.profit).Sum();
                 txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
+
+               
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void txtProfitMargin_TextChanged(object sender, TextChangedEventArgs e)
+        //check if the user has entered the right value integer or not then check in the list the profit related to that percentage and filter the list
+        //Gabriel and I could filter by the a profit margin however we could not make the profit margin work together withh other filters, I am sorry.
+        private void ProfitMarginEventHandler(object o, EventArgs ea)
         {
-            double profitMargin = 0.0;
-            double profit = 0.0;
-            if(double.TryParse(txtProfitMargin.Text, out profit) == false)
+            int profitMargin = 0;
+            if (int.TryParse(txtProfitMargin.Text, out profitMargin) == false)
             {
                 MessageBox.Show("You must enter an integer for the profit filter");
             }
 
             var subtotal = from s in myStore
-                           join sm in myStore on s.profit  equals sm.profit 
+                           join sm in myStore on s.profit equals sm.profit
                            where (s.profit / (s.orderQuantity * s.unitPrice)) * 100 >= profitMargin
                            select s;
 
-            filteredDataGrid.Items.Clear(); 
+            filteredDataGrid.Items.Clear();
 
-           foreach(ProductInfo s in subtotal)
+            foreach (ProductInfo s in subtotal)
             {
                 filteredDataGrid.Items.Add(s);
             }
+            profitMargin = 0;
         }
-       
+       private void ButtonReset(object o,EventArgs ea)
+        {
+            //Reset button method, clear the list and unselected the SubCategorie and the Province filter 
+            //and selec all the ones on the Shipping mode and Categories list
+            filteredData.Clear();
+            listShi.SelectAll();
+            listCat.SelectAll();
+            listSubCat.UnselectAll();
+            listProv.UnselectAll();
+        }
     }
 }
