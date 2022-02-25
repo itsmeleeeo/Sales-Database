@@ -310,8 +310,7 @@ namespace Assignment1_lfe_gfr_41_82
             filteredData = categoriesSelected.ToList();
             UpdateFilteredDataGrid();
         }
-
-
+        
         //Those methods show on the text box the values of the list when it is first created
         private void PopulateTotalCustomers()
         {
