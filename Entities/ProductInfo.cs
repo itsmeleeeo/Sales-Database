@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assignment1_lfe_gfr_41_82.Entities
 {
-    class ProductInfo
+  public class ProductInfo
     {
+        //all properties of the object
         public int Id { get; set; }
         public int orderQuantity { get; set; }
         public double sales { get; set; }
@@ -20,7 +21,10 @@ namespace Assignment1_lfe_gfr_41_82.Entities
         public string productCategory { get; set; }
         public string productSubCategory { get; set; }
         public string productName { get; set; }
+        public double subTotal { get; set; }
+        public double ProfitMargin { get; set; }
 
+        //constructor with backing fields 
         public ProductInfo(int nId, int nOrderQuantity, double nSales, string nShippingMode, double nProfit, 
             double nUnitPrice, string nCustomerName, string nProvince, string nCustomerSegnment, string nProductCategory, string nProductSubCategory, string nProductName)
         {
@@ -36,6 +40,8 @@ namespace Assignment1_lfe_gfr_41_82.Entities
             this.customerName = nCustomerName;
             this.customerSegment = nCustomerSegnment;
             this.province = nProvince;
+            this.subTotal = nUnitPrice * nOrderQuantity;
+            this.ProfitMargin = (profit / subTotal) * 100;
         }
     }
 }
