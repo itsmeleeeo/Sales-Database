@@ -8,6 +8,7 @@ namespace Assignment1_lfe_gfr_41_82.Entities
 {
   public class ProductInfo
     {
+        //all properties of the object
         public int Id { get; set; }
         public int orderQuantity { get; set; }
         public double sales { get; set; }
@@ -23,6 +24,7 @@ namespace Assignment1_lfe_gfr_41_82.Entities
         public double subTotal { get; set; }
         public double ProfitMargin { get; set; }
 
+        //constructor with backing fields 
         public ProductInfo(int nId, int nOrderQuantity, double nSales, string nShippingMode, double nProfit, 
             double nUnitPrice, string nCustomerName, string nProvince, string nCustomerSegnment, string nProductCategory, string nProductSubCategory, string nProductName)
         {
