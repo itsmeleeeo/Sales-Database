@@ -45,13 +45,12 @@ namespace Assignment1_lfe_gfr_41_82
             PopulateTotalCustomers();
             PopulateTotalOrders();
             PopulateTotalProfit();
-
+            chboxProfit.Unchecked += chboxProfit_Unchecked;
+            chboxProfit.Checked += chboxProfit_Checked;
             listShi.SelectionChanged += UpdateSelectShipping;
             listSubCat.SelectionChanged += UpdateSubCategories;
-            listProv.SelectionChanged += updateSelectedInfo;
             listProv.SelectionChanged += updateProvinceFilter;
             listCat.SelectionChanged += updateCategoriesFilter;
-
 
             ToggleEventHandler(true);
         }
@@ -60,10 +59,10 @@ namespace Assignment1_lfe_gfr_41_82
         {
             if(toggle)
             {
-                listProv.SelectionChanged += updateProvinceFilte;
+                listProv.SelectionChanged += updateProvinceFilter;
             } else
             {
-                listProv.SelectionChanged -= updateProvinceFilte;
+                listProv.SelectionChanged -= updateProvinceFilter;
             }
         }
 
@@ -240,38 +239,10 @@ namespace Assignment1_lfe_gfr_41_82
                                    join province in selectedProvinces on p.province equals province 
                                    select p;
 
-           
-
-           
             filteredData = provinceSelected.ToList();
-            
-           
-            filteredDataGrid.Items.Clear();
 
-                //var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Content);
-            try {
-                filteredDataGrid.Items.Clear();
-                foreach (ProductInfo p in filteredData)
-                {
-                    filteredDataGrid.Items.Add(p);
-                }
-               
-
-                //string totalTransactionsFiltered = provinceSelected.Count().ToString();
-                //Total of customers found after filtering 
-                txtTotalCustomers.Text = Convert.ToString(provinceSelected.Count());
-
-                //Total of orders after filtered
-                var totalOrders = provinceSelected.Select(x => x.orderQuantity).Sum();
-                txtTotalOrders.Text = totalOrders.ToString();
-
-                //Total profit after filtered
-                var totalProfit = provinceSelected.Select(x => x.profit).Sum();
-                txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
-            }
-            catch (Exception ex){ 
-            }
-            }
+            UpdateFilteredDataGrid();
+        }
 
         private void UpdateSubCategories(object o, EventArgs ea)
         {
@@ -282,34 +253,7 @@ namespace Assignment1_lfe_gfr_41_82
 
             filteredData = subCategoriesSelected.ToList();
 
-            filteredDataGrid.Items.Clear();
-
-            //var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Content);
-            try
-            {
-                filteredDataGrid.Items.Clear();
-                foreach (ProductInfo p in filteredData)
-                {
-                    filteredDataGrid.Items.Add(p);
-                }
-
-
-                //string totalTransactionsFiltered = provinceSelected.Count().ToString();
-                //Total of customers found after filtering 
-                txtTotalCustomers.Text = Convert.ToString(subCategoriesSelected.Count());
-
-                //Total of orders after filtered
-                var totalOrders = subCategoriesSelected.Select(x => x.orderQuantity).Sum();
-                txtTotalOrders.Text = totalOrders.ToString();
-
-                //Total profit after filtered
-                var totalProfit = subCategoriesSelected.Select(x => x.profit).Sum();
-                txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            UpdateFilteredDataGrid();
         }
 
         private void UpdateSelectShipping(object o, EventArgs ea)
@@ -321,34 +265,8 @@ namespace Assignment1_lfe_gfr_41_82
 
             filteredData = filteredShipping.ToList();
 
-            filteredDataGrid.Items.Clear();
-
-            //var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Content);
-            try
-            {
-                filteredDataGrid.Items.Clear();
-                foreach (ProductInfo p in filteredData)
-                {
-                    filteredDataGrid.Items.Add(p);
-                }
-
-
-                //string totalTransactionsFiltered = provinceSelected.Count().ToString();
-                //Total of customers found after filtering 
-                txtTotalCustomers.Text = Convert.ToString(filteredShipping.Count());
-
-                //Total of orders after filtered
-                var totalOrders = filteredShipping.Select(x => x.orderQuantity).Sum();
-                txtTotalOrders.Text = totalOrders.ToString();
-
-                //Total profit after filtered
-                var totalProfit = filteredShipping.Select(x => x.profit).Sum();
-                txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            UpdateFilteredDataGrid();
+        }
         private void updateCategoriesFilter(object o, EventArgs ea)
         {
             var selectedCategories = listCat.SelectedItems.OfType<string>();
@@ -389,37 +307,9 @@ namespace Assignment1_lfe_gfr_41_82
             //else
             //{
                 filteredData = categoriesSelected.ToList();
-
-
-                filteredDataGrid.Items.Clear();
-
-                //var selectedProvinces = listProv.Items.OfType<ListViewItem>().Where(x => x.IsSelected).Select(x => x.Content);
-                try
-                {
-                    filteredDataGrid.Items.Clear();
-                    foreach (ProductInfo p in filteredData)
-                    {
-                        filteredDataGrid.Items.Add(p);
-                    }
-
-
-                    //string totalTransactionsFiltered = provinceSelected.Count().ToString();
-                    //Total of customers found after filtering 
-                    txtTotalCustomers.Text = Convert.ToString(filteredData.Count());
-
-                    //Total of orders after filtered
-                    var totalOrders = filteredData.Select(x => x.orderQuantity).Sum();
-                    txtTotalOrders.Text = totalOrders.ToString();
-
-                    //Total profit after filtered
-                    var totalProfit = filteredData.Select(x => x.profit).Sum();
-                    txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
-                }
-                catch (Exception ex)
-                {
-                }
-            //}
+            UpdateFilteredDataGrid();
         }
+      
         private void PopulateTotalCustomers()
         {
             var totalCustomers = myStore.Select(x => x.customerName).Distinct();
@@ -441,9 +331,60 @@ namespace Assignment1_lfe_gfr_41_82
 
         private void chboxProfit_Checked(object sender, RoutedEventArgs e)
         {
-            if(chboxProfit.IsChecked == true)
+            txtProfitMargin.IsEnabled = true;
+        }
+        private void chboxProfit_Unchecked(object sender, RoutedEventArgs e)
+        {
+            txtProfitMargin.IsEnabled = false;
+        }
+
+        private void UpdateFilteredDataGrid()
+        {
+            var selectedCategories = listCat.SelectedItems.OfType<string>();
+
+            var selecShipping = listShi.SelectedItems.OfType<string>();
+
+            var selectedSubCategories = listSubCat.SelectedItems.OfType<string>();
+
+            var selectedProvinces = listProv.SelectedItems.OfType<string>();
+           
+            var finalFilterPro= from p in filteredData
+                              join final in selectedProvinces on p.province equals final
+                              select p;
+            var finalFilterCat = from p in finalFilterPro
+                                 join final in selectedCategories on p.productCategory equals final
+                                 select p;
+            var finalFilterShi = from p in finalFilterCat
+                                 join final in selecShipping on p.shippingMode equals final
+                                 select p;
+            var finalFilterSubCat = from p in finalFilterShi
+                                    join final in selecShipping on p.shippingMode equals final
+                                    select p;
+            
+
+            filteredData = finalFilterSubCat.ToList();
+            try
             {
-                txtProfitMargin.IsEnabled = true;
+                filteredDataGrid.Items.Clear();
+                foreach (ProductInfo p in filteredData)
+                {
+                    filteredDataGrid.Items.Add(p);
+                }
+
+                //Total of customers found after filtering 
+                txtTotalCustomers.Text = Convert.ToString(filteredData.Count());
+
+                //Total of orders after filtered
+                var totalOrders = filteredData.Select(x => x.orderQuantity).Sum();
+                txtTotalOrders.Text = totalOrders.ToString();
+
+                //Total profit after filtered
+                var totalProfit = filteredData.Select(x => x.profit).Sum();
+                txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
