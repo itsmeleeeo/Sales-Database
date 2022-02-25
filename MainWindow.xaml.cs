@@ -419,8 +419,21 @@ namespace Assignment1_lfe_gfr_41_82
                 filteredDataGrid.Items.Add(s);
             }
             profitMargin = 0;
+
+            //Total of customers found after filtering 
+                txtTotalCustomers.Text = Convert.ToString(subtotal.Count());
+
+            //Total of orders after filtered
+            var totalOrders = subtotal.Select(x => x.orderQuantity).Sum();
+            txtTotalOrders.Text = totalOrders.ToString();
+
+            //Total profit after filtered
+            var totalProfit = subtotal.Select(x => x.profit).Sum();
+            txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
+
+
         }
-       private void ButtonReset(object o,EventArgs ea)
+        private void ButtonReset(object o,EventArgs ea)
         {
             //Reset button method, clear the list and unselected the SubCategorie and the Province filter 
             //and selec all the ones on the Shipping mode and Categories list
