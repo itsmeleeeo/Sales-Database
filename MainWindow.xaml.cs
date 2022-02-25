@@ -23,6 +23,7 @@ namespace Assignment1_lfe_gfr_41_82
     public partial class MainWindow : Window
     {
         //initialize the objects
+        
         List<ProductInfo> myStore = new List<ProductInfo>();
         List<ProductInfo> filteredData = new List<ProductInfo>();
         public MainWindow()
@@ -49,15 +50,15 @@ namespace Assignment1_lfe_gfr_41_82
             PopulateTotalCustomers();
             PopulateTotalOrders();
             PopulateTotalProfit();
-
-            txtProfitMargin.TextChanged += txtProfitMargin_TextChanged;
-            chboxProfit.Unchecked += chboxProfit_Unchecked;
-            chboxProfit.Checked += chboxProfit_Checked;
+            
+            txtProfitMargin.TextChanged += ProfitMarginEventHandler;
+            chboxProfit.Unchecked += CheckBoxUnchecked;
+            chboxProfit.Checked += CheckBoxChecked;
             listShi.SelectionChanged += UpdateSelectShipping;
             listSubCat.SelectionChanged += UpdateSubCategories;
             listProv.SelectionChanged += updateProvinceFilter;
             listCat.SelectionChanged += updateCategoriesFilter;
-
+            btnReset.Click += ButtonReset;
             ToggleEventHandler(true);
         }
         //filter the provinces
@@ -313,11 +314,11 @@ namespace Assignment1_lfe_gfr_41_82
             txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
         }
 
-        private void chboxProfit_Checked(object sender, RoutedEventArgs e)
+        private void CheckBoxChecked(object o, EventArgs ea)
         {
             txtProfitMargin.IsEnabled = true;
         }
-        private void chboxProfit_Unchecked(object sender, RoutedEventArgs e)
+        private void CheckBoxUnchecked(object o, EventArgs ea)
         {
             txtProfitMargin.IsEnabled = false;
         }
@@ -345,8 +346,10 @@ namespace Assignment1_lfe_gfr_41_82
                                     join final in selecShipping on p.shippingMode equals final
                                     select p;
             
+            
+                filteredData = finalFilterSubCat.ToList();
+            
 
-            filteredData = finalFilterSubCat.ToList();
             try
             {
                 filteredDataGrid.Items.Clear();
@@ -354,7 +357,7 @@ namespace Assignment1_lfe_gfr_41_82
                 {
                     filteredDataGrid.Items.Add(p);
                 }
-
+                
                 //Total of customers found after filtering 
                 txtTotalCustomers.Text = Convert.ToString(filteredData.Count());
 
@@ -365,6 +368,8 @@ namespace Assignment1_lfe_gfr_41_82
                 //Total profit after filtered
                 var totalProfit = filteredData.Select(x => x.profit).Sum();
                 txtTotalProfits.Text = String.Format("${0:0,000.00}", Convert.ToDecimal(totalProfit));
+
+               
             }
             catch (Exception ex)
             {
@@ -372,27 +377,34 @@ namespace Assignment1_lfe_gfr_41_82
             }
         }
 
-        private void txtProfitMargin_TextChanged(object sender, TextChangedEventArgs e)
+        private void ProfitMarginEventHandler(object o, EventArgs ea)
         {
-            double profitMargin = 0.0;
-            double profit = 0.0;
-            if(double.TryParse(txtProfitMargin.Text, out profit) == false)
+            int profitMargin = 0;
+            if (int.TryParse(txtProfitMargin.Text, out profitMargin) == false)
             {
                 MessageBox.Show("You must enter an integer for the profit filter");
             }
 
             var subtotal = from s in myStore
-                           join sm in myStore on s.profit  equals sm.profit 
+                           join sm in myStore on s.profit equals sm.profit
                            where (s.profit / (s.orderQuantity * s.unitPrice)) * 100 >= profitMargin
                            select s;
 
-            filteredDataGrid.Items.Clear(); 
+            filteredDataGrid.Items.Clear();
 
-           foreach(ProductInfo s in subtotal)
+            foreach (ProductInfo s in subtotal)
             {
                 filteredDataGrid.Items.Add(s);
             }
+
         }
-       
+       private void ButtonReset(object o,EventArgs ea)
+        {
+            filteredData.Clear();
+            listShi.SelectAll();
+            listCat.SelectAll();
+            listSubCat.UnselectAll();
+            listProv.UnselectAll();
+        }
     }
 }
